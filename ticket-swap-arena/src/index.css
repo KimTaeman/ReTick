@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 252 252 252;
+    --foreground: 26 31 44;
+
+    --card: 0 0% 100%;
+    --card-foreground: 26 31 44;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 26 31 44;
+
+    --primary: 255 100 160; /* Ticket purple */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 41% 54%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 246 246 249;
+    --muted-foreground: 75 85 95;
+
+    --accent: 300 95% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 255 84 196;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 26 31 44;
+    --foreground: 252 252 252;
+
+    --card: 26 31 44;
+    --card-foreground: 252 252 252;
+
+    --popover: 26 31 44;
+    --popover-foreground: 252 252 252;
+
+    --primary: 255 84 196;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 41% 54%;
+    --secondary-foreground: 252 252 252;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 300 95% 54%;
+    --accent-foreground: 252 252 252;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 252 252 252;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 255 84 196;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-purple-600 to-violet-500 bg-clip-text text-transparent;
+}
+
+.ticket-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #D946EF 100%);
+}
+
+.card-hover {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.15);
+}
+
+.form-label {
+  @apply text-gray-800 dark:text-gray-200;
+}
+
+input::placeholder {
+  @apply text-gray-500 dark:text-gray-400 opacity-80;
+}
