@@ -54,7 +54,7 @@ const Footer = () => {
 
         <div className='flex flex-col md:flex-row justify-between items-center'>
           <p className='text-gray-400 text-sm'>
-            &copy; {new Date().getFullYear()} TicketSwap. All rights reserved.
+            &copy; {new Date().getFullYear()} ReTick. All rights reserved.
           </p>
         </div>
       </div>
