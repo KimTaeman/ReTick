@@ -10,6 +10,7 @@ import Events from './pages/Events';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import CreateListing from './pages/CreateListing';
+import Layout from './components/Layout';
 import HowItWorks from './pages/HowItWorks';
 
 const queryClient = new QueryClient();
@@ -27,8 +28,15 @@ const App = () => (
           <Route path='/signup' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/sell' element={<CreateListing />} />
-          <Route path='/how-it-works' element={<HowItWorks />} />
           <Route path='*' element={<NotFound />} />
+          <Route
+            path='/how-it-works'
+            element={
+              <Layout>
+                <HowItWorks />
+              </Layout>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
