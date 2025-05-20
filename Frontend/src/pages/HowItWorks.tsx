@@ -1,6 +1,7 @@
 import { Check, Shield, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const HowItWorks = () => {
   const steps = [
@@ -232,6 +233,7 @@ const HowItWorks = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
