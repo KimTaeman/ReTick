@@ -1,5 +1,5 @@
 import Hero from '@/components/Hero';
-import FeaturedEvents from '@/components/FeaturedEvents';
+import FeaturedEvents from '@/components/FeaturedTickets';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';

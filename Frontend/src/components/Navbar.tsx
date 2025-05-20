@@ -21,10 +21,10 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className='hidden md:flex items-center gap-1'>
           <Link
-            to='/events'
+            to='/tickets'
             className='px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors'
           >
-            Browse Events
+            Browse Tickets
           </Link>
           <Link
             to='/how-it-works'
@@ -42,7 +42,7 @@ const Navbar = () => {
 
         {/* Desktop Actions */}
         <div className='hidden md:flex items-center gap-3'>
-          <Link to='/events'>
+          <Link to='/tickets'>
             <Button variant='outline' size='icon'>
               <Search className='h-5 w-5' />
             </Button>
@@ -80,11 +80,11 @@ const Navbar = () => {
         <div className='md:hidden bg-white border-b shadow-md'>
           <nav className='container mx-auto px-4 py-3 flex flex-col'>
             <Link
-              to='/events'
+              to='/tickets'
               className='px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-md'
               onClick={toggleMenu}
             >
-              Browse Events
+              Browse Tickets
             </Link>
             <Link
               to='/how-it-works'

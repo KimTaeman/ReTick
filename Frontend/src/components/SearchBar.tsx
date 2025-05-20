@@ -11,7 +11,7 @@ const SearchBar = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/events?q=${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/tickets?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
