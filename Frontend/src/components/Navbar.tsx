@@ -1,15 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import {
-  User,
-  LogIn,
-  Menu,
-  X,
-  Search,
-  Ticket,
-  CircleUserRound,
-} from 'lucide-react';
+import { User, LogIn, Menu, X, Search, Ticket } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,9 +58,9 @@ const Navbar = () => {
               Sign up
             </Button>
           </Link>
-          <Link to='/signup'>
-            <Button className='bg-transparent'>
-              <CircleUserRound className='bg-purple-600 hover:bg-purple-700' />
+          <Link to='/profile'>
+            <Button variant='outline' className='rounded-full'>
+              <User />
             </Button>
           </Link>
         </div>
@@ -110,7 +102,7 @@ const Navbar = () => {
             </Link>
             <hr className='my-2' />
             <Link
-              to='/search'
+              to='/events'
               className='px-3 py-3 flex items-center text-gray-700 hover:bg-gray-50 rounded-md'
               onClick={toggleMenu}
             >
@@ -133,15 +125,12 @@ const Navbar = () => {
                 Sign up
               </Button>
             </Link>
-            {/* <Link to='/signup' className='mt-2'>
-              <Button
-                className='w-full bg-purple-600 hover:bg-purple-700'
-                onClick={toggleMenu}
-              >
-                <Profile className='h-4 w-4 mr-2' />
-                Profile
-              </Button>
-            </Link> */}
+            <Link
+              to='/profile'
+              className='px-3 py-3 flex items-center text-gray-700 hover:bg-gray-50 rounded-md'
+            >
+              <User /> My Profile
+            </Link>
           </nav>
         </div>
       )}
