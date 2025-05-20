@@ -31,9 +31,9 @@ const Hero = () => {
           </div>
 
           <div className='flex flex-wrap gap-4 justify-center'>
-            <Link to='/events'>
+            <Link to='/tickets'>
               <Button size='lg' className='bg-teal-600 hover:bg-teal-700 px-8'>
-                Browse Events
+                Browse Tickets
               </Button>
             </Link>
             <Link to='/sell'>
