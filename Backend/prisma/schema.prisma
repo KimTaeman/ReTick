@@ -30,18 +30,6 @@ model User {
 
 
 model Ticket {
-<<<<<<< HEAD
-  id          String   @id @default(uuid())
-  eventName   String
-  eventDate   DateTime
-  price       Float
-  description String?
-  seat       String?
-  location    String
-  imageUrl    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-=======
   id             String   @id @default(uuid())
   venue          String
   city           String
@@ -61,7 +49,6 @@ model Ticket {
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
->>>>>>> 621bea95c98eb90ffc182a290488cba4435deb6d
 
   // Relations
   sellerId        String
