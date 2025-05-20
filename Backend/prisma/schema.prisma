@@ -28,7 +28,9 @@ model User {
   tickets Ticket[]
 }
 
+
 model Ticket {
+<<<<<<< HEAD
   id          String   @id @default(uuid())
   eventName   String
   eventDate   DateTime
@@ -39,8 +41,31 @@ model Ticket {
   imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+=======
+  id             String   @id @default(uuid())
+  venue          String
+  city           String
+  eventDate      DateTime
+  eventTime      String    
+  category       String
+  eventName      String
+
+  numberOfTickets Int
+  pricePerTicket  Float
+  section         String?
+  row             String?
+  seats           String? 
+  ticketType      String
+  description     String?
+  imageUrl        String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+>>>>>>> 621bea95c98eb90ffc182a290488cba4435deb6d
 
   // Relations
-  sellerId String
-  seller   User   @relation(fields: [sellerId], references: [id])
+  sellerId        String
+  seller          User     @relation(fields: [sellerId], references: [id])
 }
+
+
