@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -123,6 +126,23 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  password: 'password',
+  phone: 'phone'
+};
+
+exports.Prisma.TicketOrderByRelevanceFieldEnum = {
+  id: 'id',
+  eventName: 'eventName',
+  description: 'description',
+  location: 'location',
+  imageUrl: 'imageUrl',
+  sellerId: 'sellerId'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -157,7 +177,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -166,7 +186,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
+  "activeProvider": "mysql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -175,8 +195,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String?\n  password  String\n  phone     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  tickets Ticket[]\n}\n\nmodel Ticket {\n  id          String   @id @default(uuid())\n  eventName   String\n  eventDate   DateTime\n  price       Float\n  description String?\n  location    String\n  imageUrl    String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // Relations\n  sellerId String\n  seller   User   @relation(fields: [sellerId], references: [id])\n}\n",
-  "inlineSchemaHash": "b89da34753de336846e07919d4422781bd8f4285a6ab3695a6767a782a527fdc",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider          = \"mysql\"\n  url               = env(\"DATABASE_URL\")\n  shadowDatabaseUrl = env(\"SHADOW_DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String?\n  password  String\n  phone     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  tickets Ticket[]\n}\n\nmodel Ticket {\n  id          String   @id @default(uuid())\n  eventName   String\n  eventDate   DateTime\n  price       Float\n  description String?\n  location    String\n  imageUrl    String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // Relations\n  sellerId String\n  seller   User   @relation(fields: [sellerId], references: [id])\n}\n",
+  "inlineSchemaHash": "aa410929e39255e0ad15890ea0f8a890d0e3cda9042f752c571d7dffed704436",
   "copyEngine": true
 }
 
