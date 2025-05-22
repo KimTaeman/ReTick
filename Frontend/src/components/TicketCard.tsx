@@ -92,7 +92,26 @@ interface TicketCardProps {
   ticket: Ticket;
 }
 
+const getTicketTypeStyle = (ticketType: string) => {
+  switch (ticketType.toLowerCase()) {
+    case 'vip':
+      return 'bg-orange-100 text-orange-800';
+    case 'standard':
+      return 'bg-blue-100 text-blue-800';
+    case 'premium':
+      return 'bg-yellow-100 text-yellow-800';
+    case 'general admission':
+      return 'bg-green-100 text-green-800';
+    case 'backstage':
+      return 'bg-pink-100 text-pink-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
+  }
+};
+
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
+  const ticketTypeStyle = getTicketTypeStyle(ticket.ticketType);
+
   return (
     <Link to={`/tickets/${ticket.id}`} className='block'>
       <div className='max-w-sm rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300'>
@@ -117,7 +136,9 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
             <h3 className='text-xl font-bold text-gray-800 truncate'>
               {ticket.eventName}
             </h3>
-            <span className='bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded'>
+            <span
+              className={`${ticketTypeStyle} text-xs font-semibold px-2.5 py-0.5 rounded`}
+            >
               {ticket.ticketType}
             </span>
           </div>
@@ -161,10 +182,23 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
                 d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
               />
             </svg>
-            <span>
-              {format(new Date(ticket.eventDate), 'MMM dd, yyyy')} at{' '}
-              {ticket.eventTime}
+            <span className='mr-5'>
+              {format(new Date(ticket.eventDate), 'MMM dd, yyyy')}
             </span>
+            <svg
+              className='w-4 h-4 mr-1'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+              />
+            </svg>
+            <span>{ticket.eventTime}</span>
           </div>
 
           <div className='flex justify-between items-center mt-4'>
