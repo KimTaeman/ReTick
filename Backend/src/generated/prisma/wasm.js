@@ -114,6 +114,9 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -156,6 +159,30 @@ exports.Prisma.SortOrder = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  password: 'password',
+  phone: 'phone'
+};
+
+exports.Prisma.TicketOrderByRelevanceFieldEnum = {
+  id: 'id',
+  venue: 'venue',
+  city: 'city',
+  eventTime: 'eventTime',
+  category: 'category',
+  eventName: 'eventName',
+  section: 'section',
+  row: 'row',
+  seats: 'seats',
+  ticketType: 'ticketType',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  sellerId: 'sellerId'
 };
 
 

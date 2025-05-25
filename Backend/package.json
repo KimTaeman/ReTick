@@ -2,7 +2,8 @@
   "name": "Backend",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "tsx src/index.ts",
+    "dev:alt": "ts-node-esm src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -16,10 +17,10 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^20.11.17",
-    "nodemon": "^3.1.10",
+    "@types/node": "^20.17.50",
     "prisma": "^6.8.2",
-    "tsx": "^4.7.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }
