@@ -174,7 +174,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/adorosis/Desktop/REtick-tkeic/ReTick/Backend/src/generated/prisma",
+      "value": "C:\\Users\\User\\Desktop\\ReTick\\Backend\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -183,16 +183,17 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/adorosis/Desktop/REtick-tkeic/ReTick/Backend/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\User\\Desktop\\ReTick\\Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.8.2",
@@ -201,7 +202,6 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -250,8 +250,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")
