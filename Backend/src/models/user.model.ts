@@ -1,7 +1,130 @@
 import { db } from "../index.ts";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-export const createUser = async (data: any) => {
-  return await db.user.create({ data });
+type userPayLoad = {
+  id: string;
+  email: string;
+  name: string;
+}
+export const hashPassword = async (plainPassword: string) => {
+  return await bcrypt.hash(plainPassword, 10);
+};
+
+export const createUser = async (
+  email: string,
+  password: string,
+  name: string
+) => {
+  const existingUser = await db.user.findUnique({
+      where: { email },
+  })
+  if(existingUser) {
+      return {
+          success: false,
+          message: "User already exists",
+      }
+  }
+  const hashedPassword = await hashPassword(password);
+  const newUser = await db.user.create({
+      data : {
+          email,
+          name,
+          password: hashedPassword
+      }
+  })
+  return { success: true, message: "User created", user: newUser };
+}
+
+export const updateUsername = async (userId: string, newUsername: string) => {
+  const existingUser = await db.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!existingUser) {
+    return {
+      success: false,
+      message: "User not found",
+      user: null,
+    };
+  }
+
+  const updatedUser = await db.user.update({
+    where: { id: userId },
+    data: { name : newUsername },
+  });
+
+  return {
+    success: true,
+    message: "Username updated",
+    user: updatedUser,
+  };
+};
+
+export const generateRefreshToken = (userId: number): string => {
+  const refreshSecret = process.env.REFRESH_TOKEN_SECRET_KEY;
+  if (!refreshSecret) throw new Error("Missing REFRESH_TOKEN_SECRET_KEY");
+
+  return jwt.sign({ _id: userId }, refreshSecret, {
+    expiresIn: "7d",
+  });
+};
+export const generateToken = (user: userPayLoad): string => {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error("Missing JWT_SECRET");
+
+  const payload = {
+    _id: user.id,
+    email: user.email,
+    name: user.name,
+  };
+
+  return jwt.sign(payload, secret, { expiresIn: "15m" });
+};
+
+export const getUserSoldTickets = async (userId: string) => {
+  try {
+    const userWithTickets = await db.user.findUnique({
+      where: { id: userId },
+      include: {
+        tickets: {
+          orderBy: { createdAt: 'desc' }
+        }
+      }
+    });
+
+    if (!userWithTickets) {
+      return {
+        success: false,
+        message: "User not found",
+        tickets: null,
+      };
+    }
+
+    return {
+      success: true,
+      message: "Tickets retrieved successfully",
+      tickets: userWithTickets.tickets,
+      user: {
+        id: userWithTickets.id,
+        name: userWithTickets.name,
+        email: userWithTickets.email
+      }
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Error retrieving tickets",
+      tickets: null,
+    };
+  }
+};
+
+export const ispasswordMatch = async (
+  plainPassword: string,
+  hashPassword: string
+) => {
+  return await bcrypt.compare(plainPassword, hashPassword);
 };
 
 export const getAllUsers = async () => {

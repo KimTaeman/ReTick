@@ -1964,20 +1964,30 @@ export namespace Prisma {
   }
 
   export type TicketAvgAggregateOutputType = {
-    price: number | null
+    numberOfTickets: number | null
+    pricePerTicket: number | null
   }
 
   export type TicketSumAggregateOutputType = {
-    price: number | null
+    numberOfTickets: number | null
+    pricePerTicket: number | null
   }
 
   export type TicketMinAggregateOutputType = {
     id: string | null
-    eventName: string | null
+    venue: string | null
+    city: string | null
     eventDate: Date | null
-    price: number | null
+    eventTime: string | null
+    category: string | null
+    eventName: string | null
+    numberOfTickets: number | null
+    pricePerTicket: number | null
+    section: string | null
+    row: string | null
+    seats: string | null
+    ticketType: string | null
     description: string | null
-    location: string | null
     imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1986,11 +1996,19 @@ export namespace Prisma {
 
   export type TicketMaxAggregateOutputType = {
     id: string | null
-    eventName: string | null
+    venue: string | null
+    city: string | null
     eventDate: Date | null
-    price: number | null
+    eventTime: string | null
+    category: string | null
+    eventName: string | null
+    numberOfTickets: number | null
+    pricePerTicket: number | null
+    section: string | null
+    row: string | null
+    seats: string | null
+    ticketType: string | null
     description: string | null
-    location: string | null
     imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1999,11 +2017,19 @@ export namespace Prisma {
 
   export type TicketCountAggregateOutputType = {
     id: number
-    eventName: number
+    venue: number
+    city: number
     eventDate: number
-    price: number
+    eventTime: number
+    category: number
+    eventName: number
+    numberOfTickets: number
+    pricePerTicket: number
+    section: number
+    row: number
+    seats: number
+    ticketType: number
     description: number
-    location: number
     imageUrl: number
     createdAt: number
     updatedAt: number
@@ -2013,20 +2039,30 @@ export namespace Prisma {
 
 
   export type TicketAvgAggregateInputType = {
-    price?: true
+    numberOfTickets?: true
+    pricePerTicket?: true
   }
 
   export type TicketSumAggregateInputType = {
-    price?: true
+    numberOfTickets?: true
+    pricePerTicket?: true
   }
 
   export type TicketMinAggregateInputType = {
     id?: true
-    eventName?: true
+    venue?: true
+    city?: true
     eventDate?: true
-    price?: true
+    eventTime?: true
+    category?: true
+    eventName?: true
+    numberOfTickets?: true
+    pricePerTicket?: true
+    section?: true
+    row?: true
+    seats?: true
+    ticketType?: true
     description?: true
-    location?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -2035,11 +2071,19 @@ export namespace Prisma {
 
   export type TicketMaxAggregateInputType = {
     id?: true
-    eventName?: true
+    venue?: true
+    city?: true
     eventDate?: true
-    price?: true
+    eventTime?: true
+    category?: true
+    eventName?: true
+    numberOfTickets?: true
+    pricePerTicket?: true
+    section?: true
+    row?: true
+    seats?: true
+    ticketType?: true
     description?: true
-    location?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -2048,11 +2092,19 @@ export namespace Prisma {
 
   export type TicketCountAggregateInputType = {
     id?: true
-    eventName?: true
+    venue?: true
+    city?: true
     eventDate?: true
-    price?: true
+    eventTime?: true
+    category?: true
+    eventName?: true
+    numberOfTickets?: true
+    pricePerTicket?: true
+    section?: true
+    row?: true
+    seats?: true
+    ticketType?: true
     description?: true
-    location?: true
     imageUrl?: true
     createdAt?: true
     updatedAt?: true
@@ -2148,11 +2200,19 @@ export namespace Prisma {
 
   export type TicketGroupByOutputType = {
     id: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section: string | null
+    row: string | null
+    seats: string | null
+    ticketType: string
     description: string | null
-    location: string
     imageUrl: string | null
     createdAt: Date
     updatedAt: Date
@@ -2180,11 +2240,19 @@ export namespace Prisma {
 
   export type TicketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    eventName?: boolean
+    venue?: boolean
+    city?: boolean
     eventDate?: boolean
-    price?: boolean
+    eventTime?: boolean
+    category?: boolean
+    eventName?: boolean
+    numberOfTickets?: boolean
+    pricePerTicket?: boolean
+    section?: boolean
+    row?: boolean
+    seats?: boolean
+    ticketType?: boolean
     description?: boolean
-    location?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2196,18 +2264,26 @@ export namespace Prisma {
 
   export type TicketSelectScalar = {
     id?: boolean
-    eventName?: boolean
+    venue?: boolean
+    city?: boolean
     eventDate?: boolean
-    price?: boolean
+    eventTime?: boolean
+    category?: boolean
+    eventName?: boolean
+    numberOfTickets?: boolean
+    pricePerTicket?: boolean
+    section?: boolean
+    row?: boolean
+    seats?: boolean
+    ticketType?: boolean
     description?: boolean
-    location?: boolean
     imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sellerId?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventName" | "eventDate" | "price" | "description" | "location" | "imageUrl" | "createdAt" | "updatedAt" | "sellerId", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venue" | "city" | "eventDate" | "eventTime" | "category" | "eventName" | "numberOfTickets" | "pricePerTicket" | "section" | "row" | "seats" | "ticketType" | "description" | "imageUrl" | "createdAt" | "updatedAt" | "sellerId", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     seller?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2219,11 +2295,19 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      eventName: string
+      venue: string
+      city: string
       eventDate: Date
-      price: number
+      eventTime: string
+      category: string
+      eventName: string
+      numberOfTickets: number
+      pricePerTicket: number
+      section: string | null
+      row: string | null
+      seats: string | null
+      ticketType: string
       description: string | null
-      location: string
       imageUrl: string | null
       createdAt: Date
       updatedAt: Date
@@ -2599,11 +2683,19 @@ export namespace Prisma {
    */
   interface TicketFieldRefs {
     readonly id: FieldRef<"Ticket", 'String'>
-    readonly eventName: FieldRef<"Ticket", 'String'>
+    readonly venue: FieldRef<"Ticket", 'String'>
+    readonly city: FieldRef<"Ticket", 'String'>
     readonly eventDate: FieldRef<"Ticket", 'DateTime'>
-    readonly price: FieldRef<"Ticket", 'Float'>
+    readonly eventTime: FieldRef<"Ticket", 'String'>
+    readonly category: FieldRef<"Ticket", 'String'>
+    readonly eventName: FieldRef<"Ticket", 'String'>
+    readonly numberOfTickets: FieldRef<"Ticket", 'Int'>
+    readonly pricePerTicket: FieldRef<"Ticket", 'Float'>
+    readonly section: FieldRef<"Ticket", 'String'>
+    readonly row: FieldRef<"Ticket", 'String'>
+    readonly seats: FieldRef<"Ticket", 'String'>
+    readonly ticketType: FieldRef<"Ticket", 'String'>
     readonly description: FieldRef<"Ticket", 'String'>
-    readonly location: FieldRef<"Ticket", 'String'>
     readonly imageUrl: FieldRef<"Ticket", 'String'>
     readonly createdAt: FieldRef<"Ticket", 'DateTime'>
     readonly updatedAt: FieldRef<"Ticket", 'DateTime'>
@@ -2998,11 +3090,19 @@ export namespace Prisma {
 
   export const TicketScalarFieldEnum: {
     id: 'id',
-    eventName: 'eventName',
+    venue: 'venue',
+    city: 'city',
     eventDate: 'eventDate',
-    price: 'price',
+    eventTime: 'eventTime',
+    category: 'category',
+    eventName: 'eventName',
+    numberOfTickets: 'numberOfTickets',
+    pricePerTicket: 'pricePerTicket',
+    section: 'section',
+    row: 'row',
+    seats: 'seats',
+    ticketType: 'ticketType',
     description: 'description',
-    location: 'location',
     imageUrl: 'imageUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -3041,9 +3141,16 @@ export namespace Prisma {
 
   export const TicketOrderByRelevanceFieldEnum: {
     id: 'id',
+    venue: 'venue',
+    city: 'city',
+    eventTime: 'eventTime',
+    category: 'category',
     eventName: 'eventName',
+    section: 'section',
+    row: 'row',
+    seats: 'seats',
+    ticketType: 'ticketType',
     description: 'description',
-    location: 'location',
     imageUrl: 'imageUrl',
     sellerId: 'sellerId'
   };
@@ -3071,16 +3178,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
   /**
    * Deep Input Types
@@ -3158,11 +3265,19 @@ export namespace Prisma {
     OR?: TicketWhereInput[]
     NOT?: TicketWhereInput | TicketWhereInput[]
     id?: StringFilter<"Ticket"> | string
-    eventName?: StringFilter<"Ticket"> | string
+    venue?: StringFilter<"Ticket"> | string
+    city?: StringFilter<"Ticket"> | string
     eventDate?: DateTimeFilter<"Ticket"> | Date | string
-    price?: FloatFilter<"Ticket"> | number
+    eventTime?: StringFilter<"Ticket"> | string
+    category?: StringFilter<"Ticket"> | string
+    eventName?: StringFilter<"Ticket"> | string
+    numberOfTickets?: IntFilter<"Ticket"> | number
+    pricePerTicket?: FloatFilter<"Ticket"> | number
+    section?: StringNullableFilter<"Ticket"> | string | null
+    row?: StringNullableFilter<"Ticket"> | string | null
+    seats?: StringNullableFilter<"Ticket"> | string | null
+    ticketType?: StringFilter<"Ticket"> | string
     description?: StringNullableFilter<"Ticket"> | string | null
-    location?: StringFilter<"Ticket"> | string
     imageUrl?: StringNullableFilter<"Ticket"> | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
@@ -3172,11 +3287,19 @@ export namespace Prisma {
 
   export type TicketOrderByWithRelationInput = {
     id?: SortOrder
-    eventName?: SortOrder
+    venue?: SortOrder
+    city?: SortOrder
     eventDate?: SortOrder
-    price?: SortOrder
+    eventTime?: SortOrder
+    category?: SortOrder
+    eventName?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+    section?: SortOrderInput | SortOrder
+    row?: SortOrderInput | SortOrder
+    seats?: SortOrderInput | SortOrder
+    ticketType?: SortOrder
     description?: SortOrderInput | SortOrder
-    location?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3190,11 +3313,19 @@ export namespace Prisma {
     AND?: TicketWhereInput | TicketWhereInput[]
     OR?: TicketWhereInput[]
     NOT?: TicketWhereInput | TicketWhereInput[]
-    eventName?: StringFilter<"Ticket"> | string
+    venue?: StringFilter<"Ticket"> | string
+    city?: StringFilter<"Ticket"> | string
     eventDate?: DateTimeFilter<"Ticket"> | Date | string
-    price?: FloatFilter<"Ticket"> | number
+    eventTime?: StringFilter<"Ticket"> | string
+    category?: StringFilter<"Ticket"> | string
+    eventName?: StringFilter<"Ticket"> | string
+    numberOfTickets?: IntFilter<"Ticket"> | number
+    pricePerTicket?: FloatFilter<"Ticket"> | number
+    section?: StringNullableFilter<"Ticket"> | string | null
+    row?: StringNullableFilter<"Ticket"> | string | null
+    seats?: StringNullableFilter<"Ticket"> | string | null
+    ticketType?: StringFilter<"Ticket"> | string
     description?: StringNullableFilter<"Ticket"> | string | null
-    location?: StringFilter<"Ticket"> | string
     imageUrl?: StringNullableFilter<"Ticket"> | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
@@ -3204,11 +3335,19 @@ export namespace Prisma {
 
   export type TicketOrderByWithAggregationInput = {
     id?: SortOrder
-    eventName?: SortOrder
+    venue?: SortOrder
+    city?: SortOrder
     eventDate?: SortOrder
-    price?: SortOrder
+    eventTime?: SortOrder
+    category?: SortOrder
+    eventName?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+    section?: SortOrderInput | SortOrder
+    row?: SortOrderInput | SortOrder
+    seats?: SortOrderInput | SortOrder
+    ticketType?: SortOrder
     description?: SortOrderInput | SortOrder
-    location?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3225,11 +3364,19 @@ export namespace Prisma {
     OR?: TicketScalarWhereWithAggregatesInput[]
     NOT?: TicketScalarWhereWithAggregatesInput | TicketScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Ticket"> | string
-    eventName?: StringWithAggregatesFilter<"Ticket"> | string
+    venue?: StringWithAggregatesFilter<"Ticket"> | string
+    city?: StringWithAggregatesFilter<"Ticket"> | string
     eventDate?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
-    price?: FloatWithAggregatesFilter<"Ticket"> | number
+    eventTime?: StringWithAggregatesFilter<"Ticket"> | string
+    category?: StringWithAggregatesFilter<"Ticket"> | string
+    eventName?: StringWithAggregatesFilter<"Ticket"> | string
+    numberOfTickets?: IntWithAggregatesFilter<"Ticket"> | number
+    pricePerTicket?: FloatWithAggregatesFilter<"Ticket"> | number
+    section?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    row?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    seats?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    ticketType?: StringWithAggregatesFilter<"Ticket"> | string
     description?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
-    location?: StringWithAggregatesFilter<"Ticket"> | string
     imageUrl?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
@@ -3312,11 +3459,19 @@ export namespace Prisma {
 
   export type TicketCreateInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3325,11 +3480,19 @@ export namespace Prisma {
 
   export type TicketUncheckedCreateInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3338,11 +3501,19 @@ export namespace Prisma {
 
   export type TicketUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3351,11 +3522,19 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3364,11 +3543,19 @@ export namespace Prisma {
 
   export type TicketCreateManyInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3377,11 +3564,19 @@ export namespace Prisma {
 
   export type TicketUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3389,11 +3584,19 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3542,6 +3745,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -3566,11 +3780,19 @@ export namespace Prisma {
 
   export type TicketCountOrderByAggregateInput = {
     id?: SortOrder
-    eventName?: SortOrder
+    venue?: SortOrder
+    city?: SortOrder
     eventDate?: SortOrder
-    price?: SortOrder
+    eventTime?: SortOrder
+    category?: SortOrder
+    eventName?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+    section?: SortOrder
+    row?: SortOrder
+    seats?: SortOrder
+    ticketType?: SortOrder
     description?: SortOrder
-    location?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3578,16 +3800,25 @@ export namespace Prisma {
   }
 
   export type TicketAvgOrderByAggregateInput = {
-    price?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
   }
 
   export type TicketMaxOrderByAggregateInput = {
     id?: SortOrder
-    eventName?: SortOrder
+    venue?: SortOrder
+    city?: SortOrder
     eventDate?: SortOrder
-    price?: SortOrder
+    eventTime?: SortOrder
+    category?: SortOrder
+    eventName?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+    section?: SortOrder
+    row?: SortOrder
+    seats?: SortOrder
+    ticketType?: SortOrder
     description?: SortOrder
-    location?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3596,11 +3827,19 @@ export namespace Prisma {
 
   export type TicketMinOrderByAggregateInput = {
     id?: SortOrder
-    eventName?: SortOrder
+    venue?: SortOrder
+    city?: SortOrder
     eventDate?: SortOrder
-    price?: SortOrder
+    eventTime?: SortOrder
+    category?: SortOrder
+    eventName?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+    section?: SortOrder
+    row?: SortOrder
+    seats?: SortOrder
+    ticketType?: SortOrder
     description?: SortOrder
-    location?: SortOrder
     imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3608,7 +3847,24 @@ export namespace Prisma {
   }
 
   export type TicketSumOrderByAggregateInput = {
-    price?: SortOrder
+    numberOfTickets?: SortOrder
+    pricePerTicket?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -3685,6 +3941,14 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTicketsInput, UserUncheckedCreateWithoutTicketsInput>
     connectOrCreate?: UserCreateOrConnectWithoutTicketsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -3827,6 +4091,22 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -3845,11 +4125,19 @@ export namespace Prisma {
 
   export type TicketCreateWithoutSellerInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3857,11 +4145,19 @@ export namespace Prisma {
 
   export type TicketUncheckedCreateWithoutSellerInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3898,11 +4194,19 @@ export namespace Prisma {
     OR?: TicketScalarWhereInput[]
     NOT?: TicketScalarWhereInput | TicketScalarWhereInput[]
     id?: StringFilter<"Ticket"> | string
-    eventName?: StringFilter<"Ticket"> | string
+    venue?: StringFilter<"Ticket"> | string
+    city?: StringFilter<"Ticket"> | string
     eventDate?: DateTimeFilter<"Ticket"> | Date | string
-    price?: FloatFilter<"Ticket"> | number
+    eventTime?: StringFilter<"Ticket"> | string
+    category?: StringFilter<"Ticket"> | string
+    eventName?: StringFilter<"Ticket"> | string
+    numberOfTickets?: IntFilter<"Ticket"> | number
+    pricePerTicket?: FloatFilter<"Ticket"> | number
+    section?: StringNullableFilter<"Ticket"> | string | null
+    row?: StringNullableFilter<"Ticket"> | string | null
+    seats?: StringNullableFilter<"Ticket"> | string | null
+    ticketType?: StringFilter<"Ticket"> | string
     description?: StringNullableFilter<"Ticket"> | string | null
-    location?: StringFilter<"Ticket"> | string
     imageUrl?: StringNullableFilter<"Ticket"> | string | null
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
@@ -3967,11 +4271,19 @@ export namespace Prisma {
 
   export type TicketCreateManySellerInput = {
     id?: string
-    eventName: string
+    venue: string
+    city: string
     eventDate: Date | string
-    price: number
+    eventTime: string
+    category: string
+    eventName: string
+    numberOfTickets: number
+    pricePerTicket: number
+    section?: string | null
+    row?: string | null
+    seats?: string | null
+    ticketType: string
     description?: string | null
-    location: string
     imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3979,11 +4291,19 @@ export namespace Prisma {
 
   export type TicketUpdateWithoutSellerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3991,11 +4311,19 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateWithoutSellerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4003,11 +4331,19 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateManyWithoutSellerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    price?: FloatFieldUpdateOperationsInput | number
+    eventTime?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    numberOfTickets?: IntFieldUpdateOperationsInput | number
+    pricePerTicket?: FloatFieldUpdateOperationsInput | number
+    section?: NullableStringFieldUpdateOperationsInput | string | null
+    row?: NullableStringFieldUpdateOperationsInput | string | null
+    seats?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

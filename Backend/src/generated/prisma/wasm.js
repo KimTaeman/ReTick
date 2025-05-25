@@ -132,11 +132,19 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.TicketScalarFieldEnum = {
   id: 'id',
-  eventName: 'eventName',
+  venue: 'venue',
+  city: 'city',
   eventDate: 'eventDate',
-  price: 'price',
+  eventTime: 'eventTime',
+  category: 'category',
+  eventName: 'eventName',
+  numberOfTickets: 'numberOfTickets',
+  pricePerTicket: 'pricePerTicket',
+  section: 'section',
+  row: 'row',
+  seats: 'seats',
+  ticketType: 'ticketType',
   description: 'description',
-  location: 'location',
   imageUrl: 'imageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -163,9 +171,16 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
 
 exports.Prisma.TicketOrderByRelevanceFieldEnum = {
   id: 'id',
+  venue: 'venue',
+  city: 'city',
+  eventTime: 'eventTime',
+  category: 'category',
   eventName: 'eventName',
+  section: 'section',
+  row: 'row',
+  seats: 'seats',
+  ticketType: 'ticketType',
   description: 'description',
-  location: 'location',
   imageUrl: 'imageUrl',
   sellerId: 'sellerId'
 };
