@@ -11,6 +11,7 @@ export const hashPassword = async (plainPassword: string) => {
   return await bcrypt.hash(plainPassword, 10);
 };
 
+
 export const createUser = async (
   email: string,
   password: string,
@@ -100,7 +101,7 @@ export const getUserSoldTickets = async (userId: string) => {
         tickets: null,
       };
     }
-
+    
     return {
       success: true,
       message: "Tickets retrieved successfully",
@@ -120,6 +121,124 @@ export const getUserSoldTickets = async (userId: string) => {
   }
 };
 
+
+//to use in changing user first name
+export const changeName = async (userId: string, name: string) => {
+  try {
+    const existingUser = await db.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existingUser) {
+      return {
+        success: false,
+        message: "User not found",
+        user: null,
+      };
+    }
+
+    const updatedUser = await db.user.update({
+      where: { id: userId },
+      data: { name },
+    });
+
+    return {
+      success: true,
+      message: "Name updated successfully",
+      user: updatedUser,
+    };
+  }
+  catch (error) {
+    return {
+      success: false,
+      message: "User not found",
+    };
+  }
+}
+
+// Simple delete ticket
+export const deleteTicket = async (ticketId: string, userId: string) => {
+  try {
+    const ticket = await db.ticket.findUnique({
+      where: { id: ticketId }
+    });
+
+    if (!ticket) {
+      return {
+        success: false,
+        message: "Ticket not found",
+        ticket: null,
+      };
+    }
+
+    // Check if user is the seller
+    if (ticket.sellerId !== userId) {
+      return {
+        success: false,
+        message: "You can only delete tickets you are selling",
+        ticket: null,
+      };
+    }
+
+    // Delete the ticket
+    const deletedTicket = await db.ticket.delete({
+      where: { id: ticketId }
+    });
+
+    return {
+      success: true,
+      message: "Ticket deleted successfully",
+      ticket: deletedTicket,
+    };
+  } catch (error) {
+    console.error("Error deleting ticket:", error);
+    return {
+      success: false,
+      message: "Error deleting ticket",
+      ticket: null,
+    };
+  }
+};
+
+//to use in save change in profile page
+export const changePhoneNumber = async (userId : string, userPhone : string) => {
+    try {
+      const existingUser = await db.user.findUnique({
+      where: { id : userId},
+    })
+    if (!existingUser) {
+      return {
+        success: false,
+        message: "User not found",
+        user: null,
+      };
+    }
+
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    if (userPhone && !phoneRegex.test(userPhone.replace(/[\s\-\(\)]/g, ''))) {
+      return {
+        success: false,
+        message: "Invalid phone number format",
+        user: null,
+      };
+    }
+    const updatedUser = await db.user.update({
+      where: { id: userId },
+      data: { phone: userPhone },
+    })
+    return {
+      success: true,
+      message: "Phone number updated successfully",
+      user : updatedUser
+    }
+    }
+    catch (error) {
+      return {
+        success: false,
+        message: "User not found",
+      };
+    }
+}
 export const ispasswordMatch = async (
   plainPassword: string,
   hashPassword: string
