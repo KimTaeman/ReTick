@@ -1,5 +1,7 @@
 import { Hono } from "hono";
+import * as userController from '../controllers/user.controller.ts';
+
 const userRouter = new Hono();
 
-userRouter.route("/users", userRouter);
+userRouter.post('/signup', userController.registerController);
 export { userRouter };

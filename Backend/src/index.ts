@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import { mainRouter } from './routes/index.route.ts';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
-// import { userRouter } from './routes/user.route.ts';
+import { userRouter } from "./routes/user.route.ts";
 
 
 
@@ -39,26 +39,4 @@ db.$connect()
   });
 
   app.route('', mainRouter);
-// async function startServer() {
-//   try {
-//     // Test DB connection
-//     await prisma.$connect();
-//     console.log("✅ Connected to the database");
-
-//     // Start the server after DB is connected
-//     serve(
-//       {
-//         fetch: app.fetch,
-//         port: 3000,
-//       },
-//       (info) => {
-//         console.log(`🚀 Server is running on http://localhost:${info.port}`);
-//       }
-//     );
-//   } catch (err) {
-//     console.error("❌ Failed to connect to the database:", err);
-//     process.exit(1);
-//   }
-// }
-
-// startServer();
+  app.route('',userRouter);

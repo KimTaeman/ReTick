@@ -19,7 +19,7 @@ import {
 
   type createUserBody = {
     email : string,
-    username : string,
+    name : string,
     password : string,
   };
 
@@ -30,8 +30,42 @@ import {
   export const registerController = async (c : Context) => {
     try {
         const body = await c.req.json<createUserBody>();
+        const {email, name ,password} = body;
+
+
+        if (!email || !name || !password) {
+            return c.json(
+              {
+                success: false,
+                data: null,
+                msg: 'Missing required fields',
+              },
+              400
+            );
+          }
+        const result = await createUser(email,password,name);
+        if(!result.success){
+            return c.json({
+                success : false,
+                data: null,
+                msg: 'User already exists'
+            },409
+        )
+        };
+        return c.json({
+            success: true,
+            data : result.user,
+            msg: 'Created new user!',
+        });
     }
     catch(e){
-
+    return c.json(
+      {
+        success: false,
+        data: null,
+        msg: `Internal Server Error: ${e}`,
+      },
+      500
+    );
     }
   }
