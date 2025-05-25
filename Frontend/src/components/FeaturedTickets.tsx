@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { TicketCard } from '@/components/TicketCard';
 
 // Mock data for featured tickets (aligned with Prisma schema)
-const mockTickets = [
+export const mockTickets = [
   {
     id: '1',
     venue: 'Madison Square Garden',
