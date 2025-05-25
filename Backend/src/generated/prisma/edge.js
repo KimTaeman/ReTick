@@ -86,9 +86,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -133,30 +130,6 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  password: 'password',
-  phone: 'phone'
-};
-
-exports.Prisma.TicketOrderByRelevanceFieldEnum = {
-  id: 'id',
-  venue: 'venue',
-  city: 'city',
-  eventTime: 'eventTime',
-  category: 'category',
-  eventName: 'eventName',
-  section: 'section',
-  row: 'row',
-  seats: 'seats',
-  ticketType: 'ticketType',
-  description: 'description',
-  imageUrl: 'imageUrl',
-  sellerId: 'sellerId'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -173,7 +146,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\ReTick\\Backend\\src\\generated\\prisma",
+      "value": "/Users/adorosis/Desktop/REtick-tkeic/ReTick/Backend/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -182,12 +155,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\Desktop\\ReTick\\Backend\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/adorosis/Desktop/REtick-tkeic/ReTick/Backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -200,7 +173,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "sqlite",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -209,8 +182,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider          = \"mysql\"\n  url               = env(\"DATABASE_URL\")\n  shadowDatabaseUrl = env(\"SHADOW_DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String?\n  password  String\n  phone     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  tickets Ticket[]\n}\n\nmodel Ticket {\n  id        String   @id @default(uuid())\n  venue     String\n  city      String\n  eventDate DateTime\n  eventTime String\n  category  String\n  eventName String\n\n  numberOfTickets Int\n  pricePerTicket  Float\n  section         String?\n  row             String?\n  seats           String?\n  ticketType      String\n  description     String?\n  imageUrl        String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  sellerId String\n  seller   User   @relation(fields: [sellerId], references: [id])\n}\n",
-  "inlineSchemaHash": "eb452dac86b6ea422ec343064aad883d1a9a6e2d9fd5239b4313f64d23e9a7aa",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider          = \"sqlite\"\n  url               = env(\"DATABASE_URL\")\n  shadowDatabaseUrl = env(\"SHADOW_DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String?\n  password  String\n  phone     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  tickets Ticket[]\n}\n\nmodel Ticket {\n  id        String   @id @default(uuid())\n  venue     String\n  city      String\n  eventDate DateTime\n  eventTime String\n  category  String\n  eventName String\n\n  numberOfTickets Int\n  pricePerTicket  Float\n  section         String?\n  row             String?\n  seats           String?\n  ticketType      String\n  description     String?\n  imageUrl        String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  sellerId String\n  seller   User   @relation(fields: [sellerId], references: [id])\n}\n",
+  "inlineSchemaHash": "b7f1bfe32d519ce87e1e49236f521a08fdfddc01cd29bd14db563a8fb0941f8d",
   "copyEngine": true
 }
 config.dirname = '/'

@@ -245,29 +245,3 @@ export const ispasswordMatch = async (
 ) => {
   return await bcrypt.compare(plainPassword, hashPassword);
 };
-
-export const getAllUsers = async () => {
-  return await db.user.findMany({
-    include: { tickets: true },
-  });
-};
-
-export const getUserById = async (id: string) => {
-  return await db.user.findUnique({
-    where: { id },
-    include: { tickets: true },
-  });
-};
-
-export const updateUser = async (id: string, data: any) => {
-  return await db.user.update({
-    where: { id },
-    data,
-  });
-};
-
-export const deleteUser = async (id: string) => {
-  return await db.user.delete({
-    where: { id },
-  });
-};
