@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "./generated/prisma/index.js";
 
 const app = new Hono();
-const prisma = new PrismaClient();
+export const db = new PrismaClient();
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
@@ -12,7 +12,7 @@ app.get("/", (c) => {
 async function startServer() {
   try {
     // Test DB connection
-    await prisma.$connect();
+    await db.$connect();
     console.log("✅ Connected to the database");
 
     // Start the server after DB is connected
