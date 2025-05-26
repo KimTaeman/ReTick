@@ -7,7 +7,11 @@ const ticketRouter = new Hono();
 ticketRouter.post('/', authMiddleware, ticketController.createTicketController);
 ticketRouter.get('/', ticketController.getAllTicketsController);
 ticketRouter.get('/:id', ticketController.getTicketByIdController);
-ticketRouter.put('/:id', ticketController.updateTicketController);
-ticketRouter.delete('/:id', ticketController.deleteTicketController);
+ticketRouter.put(
+  '/:id',
+  authMiddleware,
+  ticketController.updateTicketController
+);
+ticketRouter.delete('/:id', authMiddleware, ticketController.deleteTicketController);
 
 export { ticketRouter };

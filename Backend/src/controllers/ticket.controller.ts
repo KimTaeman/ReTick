@@ -36,6 +36,15 @@ export const getTicketByIdController = async (c: Context) => {
 export const updateTicketController = async (c: Context) => {
   const id = c.req.param('id');
   const body = await c.req.json();
+  const userId = c.user?.id;
+
+  const ticket = await getTicketById(id);
+  if (!ticket) {
+    return c.json({ success: false, message: 'Ticket not found' }, 404);
+  }
+  if (ticket.sellerId !== userId) {
+    return c.json({ success: false, message: 'Unauthorized' }, 403);
+  }
 
   try {
     const data = {
@@ -65,6 +74,16 @@ export const updateTicketController = async (c: Context) => {
 
 export const deleteTicketController = async (c: Context) => {
   const id = c.req.param('id');
+  const userId = c.user?.id;
+  
+  const ticket = await getTicketById(id);
+  if (!ticket) {
+    return c.json({ success: false, message: 'Ticket not found' }, 404);
+  }
+  if (ticket.sellerId !== userId) {
+    return c.json({ success: false, message: 'Unauthorized' }, 403);
+  }
+  
   try {
     await deleteTicket(id);
     return c.json({ success: true, message: 'Deleted successfully' });

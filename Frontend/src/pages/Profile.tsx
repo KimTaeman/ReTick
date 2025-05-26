@@ -16,59 +16,20 @@ import { Edit } from 'lucide-react';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/api/user';
-import { useTickets } from '../hooks/use-tickets';
-
-// Mock user data
-// const user = {
-//   id: '123',
-//   name: 'John Doe',
-//   email: 'john@example.com',
-//   avatarUrl: '',
-//   joinedDate: 'March 2023',
-// };
-
-// Mock purchase history
-// const purchaseHistory = [
-//   {
-//     id: 'purchase1',
-//     eventName: 'Taylor Swift - The Eras Tour',
-//     venue: 'SoFi Stadium, Los Angeles',
-//     date: 'August 15, 2025',
-//     price: 150,
-//     quantity: 2,
-//     status: 'Confirmed',
-//     ticketType: 'General Admission',
-//   },
-//   {
-//     id: 'purchase2',
-//     eventName: 'Coldplay - Music Of The Spheres Tour',
-//     venue: 'MetLife Stadium, New York',
-//     date: 'July 23, 2025',
-//     price: 120,
-//     quantity: 1,
-//     status: 'Confirmed',
-//     ticketType: 'Section A, Row 15',
-//   },
-// ];
-
-// // Mock listing history
-// const listingHistory = [
-//   {
-//     id: 'listing1',
-//     eventName: 'Bruno Mars - 24K Magic World Tour',
-//     venue: 'Allegiant Stadium, Las Vegas',
-//     date: 'October 15, 2025',
-//     price: 200,
-//     quantity: 2,
-//     status: 'Active',
-//     ticketType: 'Section B, Row 8, Seats 5-6',
-//   },
-// ];
+import {
+  useDeleteTicket,
+  useTickets,
+  useUpdateTicket,
+} from '../hooks/use-tickets';
 
 const Profile = () => {
   const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editTicket, setEditTicket] = useState<any>(null);
   const { data: res = [], isTicketLoading, ticketError } = useTickets();
-  // console.log('Tickets data:', res);
+  const { mutate: updateTicket, isLoading: isUpdating } = useUpdateTicket();
+  const { mutate: deleteTicket, isLoading: isDeleting } = useDeleteTicket();
+
   const {
     data: response,
     isLoading,
@@ -93,14 +54,43 @@ const Profile = () => {
       quantity: ticket.numberOfTickets,
       status: ticket.status,
       ticketType: ticket.ticketType,
+      section: ticket.section,
+      row: ticket.row,
+      seats: ticket.seats,
+      description: ticket.description,
+      imageUrl: ticket.imageUrl,
+      eventDate: ticket.eventDate,
+      eventTime: ticket.eventTime,
+      category: ticket.category,
     }));
+
+  // Edit Modal handlers
+  const openEditModal = (ticket: any) => {
+    setEditTicket(ticket);
+    setEditModalOpen(true);
+  };
+  const closeEditModal = () => {
+    setEditModalOpen(false);
+    setEditTicket(null);
+  };
+  const handleEditSave = () => {
+    if (!editTicket) return;
+    updateTicket(
+      { id: editTicket.id, data: editTicket },
+      {
+        onSuccess: () => {
+          closeEditModal();
+        },
+      }
+    );
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading profile</div>;
   if (!user) return <div>No user data</div>;
   if (isTicketLoading) return <div>Loading tickets...</div>;
   if (ticketError) return <div>Error loading tickets.</div>;
-  console.log('User data:', user);
+
   return (
     <div className='min-h-screen flex flex-col'>
       <Navbar />
@@ -120,10 +110,6 @@ const Profile = () => {
                       </AvatarFallback>
                     </Avatar>
                     <h2 className='text-xl font-bold mb-1'>{user.name}</h2>
-                    {/* <p className='text-sm text-gray-500'>
-                      Member since {user.joinedDate}
-                    </p> */}
-
                     <Button className='mt-4 w-full bg-purple-600 hover:bg-purple-700'>
                       <Edit className='h-4 w-4 mr-2' />
                       Edit Profile
@@ -153,16 +139,11 @@ const Profile = () => {
                 <CardContent>
                   <form className='space-y-4'>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                      {/* <div className='space-y-2'>
-                        <Label htmlFor='first-name'>First name</Label>
-                        <Input id='first-name' defaultValue='John' />
-                      </div> */}
                       <div className='space-y-2'>
                         <Label htmlFor='name'>Name</Label>
                         <Input id='name' defaultValue={user?.name || ''} />
                       </div>
                     </div>
-
                     <div className='space-y-2'>
                       <Label htmlFor='email'>Email address</Label>
                       <Input
@@ -171,7 +152,6 @@ const Profile = () => {
                         defaultValue={user.email || ' '}
                       />
                     </div>
-
                     <div className='space-y-2'>
                       <Label htmlFor='phone'>Phone number</Label>
                       <Input
@@ -180,7 +160,6 @@ const Profile = () => {
                         placeholder={user.phone || 'Enter your phone number'}
                       />
                     </div>
-
                     <Button
                       type='submit'
                       className='bg-purple-600 hover:bg-purple-700'
@@ -199,7 +178,7 @@ const Profile = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Tabs defaultValue='purchases'>
+                  <Tabs defaultValue='listings'>
                     <TabsList className='mb-4'>
                       <TabsTrigger value='listings'>My Listings</TabsTrigger>
                     </TabsList>
@@ -247,15 +226,23 @@ const Profile = () => {
                                 </span>
                               </div>
                               <div className='mt-4 flex justify-end gap-2'>
-                                <Button variant='outline' size='sm'>
+                                <Button
+                                  variant='outline'
+                                  size='sm'
+                                  onClick={() => openEditModal(listing)}
+                                >
                                   Edit Listing
                                 </Button>
                                 <Button
                                   variant='outline'
                                   size='sm'
                                   className='text-red-600 hover:bg-red-50'
+                                  onClick={() => deleteTicket(listing.id)}
+                                  disabled={isDeleting}
                                 >
-                                  Cancel Listing
+                                  {isDeleting
+                                    ? 'Cancelling...'
+                                    : 'Cancel Listing'}
                                 </Button>
                               </div>
                             </div>
@@ -279,6 +266,55 @@ const Profile = () => {
           </div>
         </div>
       </main>
+
+      {/* Edit Listing Modal */}
+      {editModalOpen && editTicket && (
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40'>
+          <div className='bg-white rounded-lg p-6 w-full max-w-lg shadow-lg'>
+            <h2 className='text-xl font-bold mb-4'>Edit Listing</h2>
+            <div className='space-y-2'>
+              <Label>Event Name</Label>
+              <Input
+                value={editTicket.eventName}
+                onChange={(e) =>
+                  setEditTicket({ ...editTicket, eventName: e.target.value })
+                }
+              />
+              <Label>Venue</Label>
+              <Input
+                value={editTicket.venue}
+                onChange={(e) =>
+                  setEditTicket({ ...editTicket, venue: e.target.value })
+                }
+              />
+              <Label>Price Per Ticket</Label>
+              <Input
+                type='number'
+                value={editTicket.price}
+                onChange={(e) =>
+                  setEditTicket({
+                    ...editTicket,
+                    price: Number(e.target.value),
+                  })
+                }
+              />
+              {/* Add more fields as needed */}
+            </div>
+            <div className='flex justify-end gap-2 mt-4'>
+              <Button variant='outline' onClick={closeEditModal}>
+                Cancel
+              </Button>
+              <Button
+                className='bg-purple-600 hover:bg-purple-700'
+                onClick={handleEditSave}
+                disabled={isUpdating}
+              >
+                {isUpdating ? 'Saving...' : 'Save'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

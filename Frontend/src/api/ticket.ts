@@ -26,3 +26,13 @@ export const createTicket = async (data: any) => {
   const response = await Axios.post('/tickets', newData);
   return response.data;
 };
+
+export const updateTicket = async (id: string, data: any) => {
+  const response = await Axios.put(`/tickets/${id}`, data);
+  return response.data;
+};
+
+export const deleteTicket = async (id: string) => {
+  const response = await Axios.delete(`/tickets/${id}`);
+  return response.data;
+};
