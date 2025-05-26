@@ -1,69 +1,69 @@
-import Hero from '@/components/Hero';
-import FeaturedEvents from '@/components/FeaturedTickets';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
+import Hero from "@/components/Hero";
+import FeaturedEvents from "@/components/FeaturedTickets";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   ShieldCheck,
   MessageSquare,
   CreditCard,
   Star,
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 // TestimonialCard component (can be moved to separate file if preferred)
 const TestimonialCard = ({ name, role, rating, content, avatar }) => {
   return (
-    <div className='bg-white p-6 rounded-xl shadow-sm border max-w-md mx-auto'>
-      <div className='flex items-center mb-4'>
-        <div className='w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4 flex items-center justify-center'>
+    <div className="bg-white p-6 rounded-xl shadow-sm border max-w-md mx-auto">
+      <div className="flex items-center mb-4">
+        <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4 flex items-center justify-center">
           {avatar ? (
             <img
               src={avatar}
               alt={name}
-              className='w-full h-full object-cover'
+              className="w-full h-full object-cover"
             />
           ) : (
-            <div className='w-full h-full flex items-center justify-center text-gray-500 text-xl font-medium'>
+            <div className="w-full h-full flex items-center justify-center text-gray-500 text-xl font-medium">
               {name.charAt(0)}
             </div>
           )}
         </div>
         <div>
-          <h4 className='font-medium'>{name}</h4>
-          <p className='text-sm text-gray-500'>{role}</p>
+          <h4 className="font-medium">{name}</h4>
+          <p className="text-sm text-gray-500">{role}</p>
         </div>
       </div>
 
-      <div className='flex mb-3'>
+      <div className="flex mb-3">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
             className={`h-4 w-4 ${
-              i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+              i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
             }`}
           />
         ))}
       </div>
 
-      <p className='text-gray-600'>"{content}"</p>
+      <p className="text-gray-600">"{content}"</p>
     </div>
   );
 };
 
 const Index = () => {
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className='flex-grow'>
+      <main className="flex-grow">
         <Hero />
         <FeaturedEvents />
 
         {/* How It Works Section (existing code remains the same) */}
 
-        {/* Testimonials Section */}
+        {/* Testimonials Section
         <section className='py-12 md:py-16 bg-gray-50'>
           <div className='container mx-auto px-4'>
             <div className='text-center mb-12'>
@@ -99,7 +99,7 @@ const Index = () => {
               />
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section (existing code remains the same) */}
       </main>
