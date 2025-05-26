@@ -1,64 +1,65 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import exp from 'constants';
 
 // Mock data structure matching your Prisma schema
-const mockTickets = [
-  {
-    id: '1',
-    venue: 'Madison Square Garden',
-    city: 'New York',
-    eventDate: '2023-12-15T19:00:00Z',
-    eventTime: '7:00 PM',
-    category: 'Concert',
-    eventName: 'The Weeknd: After Hours Tour',
-    numberOfTickets: 2,
-    pricePerTicket: 250.0,
-    section: 'A',
-    row: '12',
-    seats: '101, 102',
-    ticketType: 'VIP',
-    description: 'Floor seats with VIP lounge access',
-    imageUrl: 'https://source.unsplash.com/random/300x200/?concert',
-    createdAt: '2023-11-01T10:30:00Z',
-    updatedAt: '2023-11-01T10:30:00Z',
-    seller: {
-      id: 'user1',
-      email: 'seller1@example.com',
-      name: 'John Doe',
-      phone: '+1234567890',
-      createdAt: '2023-10-15T08:00:00Z',
-      updatedAt: '2023-10-15T08:00:00Z',
-    },
-  },
-  {
-    id: '2',
-    venue: 'Staples Center',
-    city: 'Los Angeles',
-    eventDate: '2023-11-20T20:30:00Z',
-    eventTime: '8:30 PM',
-    category: 'Sports',
-    eventName: 'LA Lakers vs Brooklyn Nets',
-    numberOfTickets: 4,
-    pricePerTicket: 180.5,
-    section: '210',
-    row: 'B',
-    seats: '1-4',
-    ticketType: 'Standard',
-    description: 'Great view from upper level',
-    imageUrl: 'https://source.unsplash.com/random/300x200/?basketball',
-    createdAt: '2023-10-25T14:15:00Z',
-    updatedAt: '2023-10-25T14:15:00Z',
-    seller: {
-      id: 'user2',
-      email: 'seller2@example.com',
-      name: 'Jane Smith',
-      phone: '+1987654321',
-      createdAt: '2023-09-10T11:20:00Z',
-      updatedAt: '2023-09-10T11:20:00Z',
-    },
-  },
-];
+// const mockTickets = [
+//   {
+//     id: '1',
+//     venue: 'Madison Square Garden',
+//     city: 'New York',
+//     eventDate: '2023-12-15T19:00:00Z',
+//     eventTime: '7:00 PM',
+//     category: 'Concert',
+//     eventName: 'The Weeknd: After Hours Tour',
+//     numberOfTickets: 2,
+//     pricePerTicket: 250.0,
+//     section: 'A',
+//     row: '12',
+//     seats: '101, 102',
+//     ticketType: 'VIP',
+//     description: 'Floor seats with VIP lounge access',
+//     imageUrl: 'https://source.unsplash.com/random/300x200/?concert',
+//     createdAt: '2023-11-01T10:30:00Z',
+//     updatedAt: '2023-11-01T10:30:00Z',
+//     seller: {
+//       id: 'user1',
+//       email: 'seller1@example.com',
+//       name: 'John Doe',
+//       phone: '+1234567890',
+//       createdAt: '2023-10-15T08:00:00Z',
+//       updatedAt: '2023-10-15T08:00:00Z',
+//     },
+//   },
+//   {
+//     id: '2',
+//     venue: 'Staples Center',
+//     city: 'Los Angeles',
+//     eventDate: '2023-11-20T20:30:00Z',
+//     eventTime: '8:30 PM',
+//     category: 'Sports',
+//     eventName: 'LA Lakers vs Brooklyn Nets',
+//     numberOfTickets: 4,
+//     pricePerTicket: 180.5,
+//     section: '210',
+//     row: 'B',
+//     seats: '1-4',
+//     ticketType: 'Standard',
+//     description: 'Great view from upper level',
+//     imageUrl: 'https://source.unsplash.com/random/300x200/?basketball',
+//     createdAt: '2023-10-25T14:15:00Z',
+//     updatedAt: '2023-10-25T14:15:00Z',
+//     seller: {
+//       id: 'user2',
+//       email: 'seller2@example.com',
+//       name: 'Jane Smith',
+//       phone: '+1987654321',
+//       createdAt: '2023-09-10T11:20:00Z',
+//       updatedAt: '2023-09-10T11:20:00Z',
+//     },
+//   },
+// ];
 
 interface Ticket {
   id: string;
@@ -227,14 +228,15 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
 };
 
 // Example usage with mock data
-const TicketList = () => {
-  return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4'>
-      {mockTickets.map((ticket) => (
-        <TicketCard key={ticket.id} ticket={ticket} />
-      ))}
-    </div>
-  );
-};
+// const TicketList = () => {
+//   return (
+//     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4'>
+//       {mockTickets.map((ticket) => (
+//         <TicketCard key={ticket.id} ticket={ticket} />
+//       ))}
+//     </div>
+//   );
+// };
 
-export { TicketCard, TicketList, mockTickets };
+// export { TicketCard, TicketList, mockTickets };
+export { TicketCard };

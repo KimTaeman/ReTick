@@ -5,8 +5,8 @@ import Footer from '@/components/Footer';
 import { TicketCard } from '@/components/TicketCard';
 import SearchBar from '@/components/SearchBar';
 import { Button } from '@/components/ui/button';
+import { useTickets } from '../hooks/use-tickets';
 
-// Mock data for tickets (aligned with your Prisma schema)
 const mockTickets = [
   {
     id: '1',
@@ -126,17 +126,18 @@ const mockTickets = [
 const categories = ['All', 'Concert', 'Sports', 'Theater', 'Comedy', 'Family'];
 
 const TicketsPage = () => {
+  const { data: tickets = [], isLoading, error } = useTickets();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
 
-  const [tickets, setTickets] = useState(mockTickets);
+  // const [tickets, setTickets] = useState(mockTickets);
   const [filteredTickets, setFilteredTickets] = useState(mockTickets);
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  useEffect(() => {
-    // In a real app, this would be an API call with search/filter params
-    setTickets(mockTickets);
-  }, []);
+  // useEffect(() => {
+  //   // In a real app, this would be an API call with search/filter params
+  //   setTickets(mockTickets);
+  // }, []);
 
   useEffect(() => {
     // Filter tickets based on search query and category
@@ -158,6 +159,10 @@ const TicketsPage = () => {
 
     setFilteredTickets(result);
   }, [tickets, query, selectedCategory]);
+
+  console.log('Tickets data:', tickets);
+  if (isLoading) return <div>Loading tickets...</div>;
+  if (error) return <div>Error loading tickets.</div>;
 
   return (
     <div className='min-h-screen flex flex-col'>

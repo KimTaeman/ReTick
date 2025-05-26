@@ -2,11 +2,22 @@ import { useParams } from 'react-router-dom';
 import { mockTickets } from '@/components/FeaturedTickets';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import { useQuery } from '@tanstack/react-query';
+import { useTicketById } from '@/hooks/use-tickets';
 
 const TicketDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const ticket = mockTickets.find((ticket) => ticket.id === id);
+  const { data: ticket, isLoading, error } = useTicketById(id);
+  // const ticket = mockTickets.find((ticket) => ticket.id === id);
 
+  if (isLoading) {
+    return <div className='container mx-auto px-4 py-8'>Loading ticket...</div>;
+  }
+  if (error) {
+    return (
+      <div className='container mx-auto px-4 py-8'>Error loading ticket.</div>
+    );
+  }
   if (!ticket) {
     return <div className='container mx-auto px-4 py-8'>Ticket not found</div>;
   }

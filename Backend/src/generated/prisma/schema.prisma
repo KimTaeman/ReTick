@@ -29,15 +29,25 @@ model User {
 }
 
 model Ticket {
-  id          String   @id @default(uuid())
-  eventName   String
-  eventDate   DateTime
-  price       Float
-  description String?
-  location    String
-  imageUrl    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  venue     String
+  city      String
+  eventDate DateTime
+  eventTime String
+  category  String
+  eventName String
+
+  numberOfTickets Int
+  pricePerTicket  Float
+  section         String?
+  row             String?
+  seats           String?
+  ticketType      String
+  description     String?
+  imageUrl        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
   sellerId String
