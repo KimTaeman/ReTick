@@ -16,6 +16,7 @@ import { Edit } from 'lucide-react';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/api/user';
+import { useTickets } from '../hooks/use-tickets';
 
 // Mock user data
 // const user = {
@@ -27,46 +28,47 @@ import { getProfile } from '@/api/user';
 // };
 
 // Mock purchase history
-const purchaseHistory = [
-  {
-    id: 'purchase1',
-    eventName: 'Taylor Swift - The Eras Tour',
-    venue: 'SoFi Stadium, Los Angeles',
-    date: 'August 15, 2025',
-    price: 150,
-    quantity: 2,
-    status: 'Confirmed',
-    ticketType: 'General Admission',
-  },
-  {
-    id: 'purchase2',
-    eventName: 'Coldplay - Music Of The Spheres Tour',
-    venue: 'MetLife Stadium, New York',
-    date: 'July 23, 2025',
-    price: 120,
-    quantity: 1,
-    status: 'Confirmed',
-    ticketType: 'Section A, Row 15',
-  },
-];
+// const purchaseHistory = [
+//   {
+//     id: 'purchase1',
+//     eventName: 'Taylor Swift - The Eras Tour',
+//     venue: 'SoFi Stadium, Los Angeles',
+//     date: 'August 15, 2025',
+//     price: 150,
+//     quantity: 2,
+//     status: 'Confirmed',
+//     ticketType: 'General Admission',
+//   },
+//   {
+//     id: 'purchase2',
+//     eventName: 'Coldplay - Music Of The Spheres Tour',
+//     venue: 'MetLife Stadium, New York',
+//     date: 'July 23, 2025',
+//     price: 120,
+//     quantity: 1,
+//     status: 'Confirmed',
+//     ticketType: 'Section A, Row 15',
+//   },
+// ];
 
-// Mock listing history
-const listingHistory = [
-  {
-    id: 'listing1',
-    eventName: 'Bruno Mars - 24K Magic World Tour',
-    venue: 'Allegiant Stadium, Las Vegas',
-    date: 'October 15, 2025',
-    price: 200,
-    quantity: 2,
-    status: 'Active',
-    ticketType: 'Section B, Row 8, Seats 5-6',
-  },
-];
+// // Mock listing history
+// const listingHistory = [
+//   {
+//     id: 'listing1',
+//     eventName: 'Bruno Mars - 24K Magic World Tour',
+//     venue: 'Allegiant Stadium, Las Vegas',
+//     date: 'October 15, 2025',
+//     price: 200,
+//     quantity: 2,
+//     status: 'Active',
+//     ticketType: 'Section B, Row 8, Seats 5-6',
+//   },
+// ];
 
 const Profile = () => {
   const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
-
+  const { data: res = [], isTicketLoading, ticketError } = useTickets();
+  // console.log('Tickets data:', res);
   const {
     data: response,
     isLoading,
@@ -77,10 +79,27 @@ const Profile = () => {
   });
 
   const user = response?.user;
+  const tickets = res || [];
+
+  const listingHistory = tickets
+    .map((ticket) => (ticket.sellerId === user?.id ? ticket : null))
+    .filter(Boolean)
+    .map((ticket) => ({
+      id: ticket.id,
+      eventName: ticket.eventName,
+      venue: ticket.venue,
+      date: new Date(ticket.eventDate).toLocaleDateString(),
+      price: ticket.pricePerTicket,
+      quantity: ticket.numberOfTickets,
+      status: ticket.status,
+      ticketType: ticket.ticketType,
+    }));
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading profile</div>;
   if (!user) return <div>No user data</div>;
+  if (isTicketLoading) return <div>Loading tickets...</div>;
+  if (ticketError) return <div>Error loading tickets.</div>;
   console.log('User data:', user);
   return (
     <div className='min-h-screen flex flex-col'>
