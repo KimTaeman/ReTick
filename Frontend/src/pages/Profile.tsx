@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Star, Edit } from 'lucide-react';
+import { useState } from 'react';
 
 // Mock user data
 const user = {
@@ -64,6 +65,7 @@ const listingHistory = [
 ];
 
 const Profile = () => {
+  const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
   return (
     <div className='min-h-screen flex flex-col'>
       <Navbar />
@@ -83,23 +85,6 @@ const Profile = () => {
                       </AvatarFallback>
                     </Avatar>
                     <h2 className='text-xl font-bold mb-1'>{user.name}</h2>
-                    {/* <div className='flex items-center text-yellow-500 mb-1'>
-                      {Array(5)
-                        .fill(0)
-                        .map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-4 w-4 ${
-                              i < Math.floor(user.rating)
-                                ? 'fill-yellow-500'
-                                : 'fill-gray-200'
-                            }`}
-                          />
-                        ))}
-                      <span className='ml-2 text-gray-700'>
-                        {user.rating} ({user.reviewCount})
-                      </span>
-                    </div> */}
                     <p className='text-sm text-gray-500'>
                       Member since {user.joinedDate}
                     </p>
@@ -246,13 +231,53 @@ const Profile = () => {
                                 </span>
                               </div>
                               <div className='mt-4 flex justify-end gap-2'>
-                                <Button variant='outline' size='sm'>
-                                  View Details
+                                <Button
+                                  variant='outline'
+                                  size='sm'
+                                  onClick={() =>
+                                    setOpenPurchaseId(
+                                      openPurchaseId === purchase.id
+                                        ? null
+                                        : purchase.id
+                                    )
+                                  }
+                                >
+                                  {openPurchaseId === purchase.id
+                                    ? 'Hide Details'
+                                    : 'View Details'}
                                 </Button>
-                                {/* <Button variant='outline' size='sm'>
-                                  Download Tickets
-                                </Button> */}
                               </div>
+                              {/* Details section */}
+                              {openPurchaseId === purchase.id && (
+                                <div className='mt-4 bg-gray-50 p-4 rounded'>
+                                  <p>
+                                    <strong>Event:</strong> {purchase.eventName}
+                                  </p>
+                                  <p>
+                                    <strong>Venue:</strong> {purchase.venue}
+                                  </p>
+                                  <p>
+                                    <strong>Date:</strong> {purchase.date}
+                                  </p>
+                                  <p>
+                                    <strong>Ticket Type:</strong>{' '}
+                                    {purchase.ticketType}
+                                  </p>
+                                  <p>
+                                    <strong>Quantity:</strong>{' '}
+                                    {purchase.quantity}
+                                  </p>
+                                  <p>
+                                    <strong>Total Price:</strong> $
+                                    {(
+                                      purchase.price * purchase.quantity
+                                    ).toFixed(2)}
+                                  </p>
+                                  <p>
+                                    <strong>Status:</strong> {purchase.status}
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
