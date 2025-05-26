@@ -30,7 +30,7 @@ const initialForm = {
   eventTime: '',
   category: '',
   numberOfTickets: 1,
-  pricePerTicket: '',
+  pricePerTicket: 0.0,
   section: '',
   row: '',
   seats: '',
@@ -132,8 +132,8 @@ const CreateListing = () => {
                         id='event-name'
                         placeholder='e.g., Taylor Swift - The Eras Tour'
                         value={form.eventName}
-                        onChange={e =>
-                          setForm(f => ({ ...f, eventName: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, eventName: e.target.value }))
                         }
                         required
                       />
@@ -144,8 +144,8 @@ const CreateListing = () => {
                         id='event-venue'
                         placeholder='e.g., Madison Square Garden'
                         value={form.venue}
-                        onChange={e =>
-                          setForm(f => ({ ...f, venue: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, venue: e.target.value }))
                         }
                         required
                       />
@@ -158,8 +158,8 @@ const CreateListing = () => {
                         id='event-city'
                         placeholder='e.g., New York'
                         value={form.city}
-                        onChange={e =>
-                          setForm(f => ({ ...f, city: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, city: e.target.value }))
                         }
                         required
                       />
@@ -170,8 +170,8 @@ const CreateListing = () => {
                         id='event-date'
                         type='date'
                         value={form.eventDate}
-                        onChange={e =>
-                          setForm(f => ({ ...f, eventDate: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, eventDate: e.target.value }))
                         }
                         required
                       />
@@ -184,8 +184,8 @@ const CreateListing = () => {
                         id='event-time'
                         type='time'
                         value={form.eventTime}
-                        onChange={e =>
-                          setForm(f => ({ ...f, eventTime: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, eventTime: e.target.value }))
                         }
                         required
                       />
@@ -194,8 +194,8 @@ const CreateListing = () => {
                       <Label htmlFor='event-category'>Category</Label>
                       <Select
                         value={form.category}
-                        onValueChange={val =>
-                          setForm(f => ({ ...f, category: val }))
+                        onValueChange={(val) =>
+                          setForm((f) => ({ ...f, category: val }))
                         }
                       >
                         <SelectTrigger id='event-category'>
@@ -212,7 +212,7 @@ const CreateListing = () => {
                             'Classical',
                             'Jazz',
                             'Other',
-                          ].map(genre => (
+                          ].map((genre) => (
                             <SelectItem key={genre} value={genre}>
                               {genre}
                             </SelectItem>
@@ -249,8 +249,8 @@ const CreateListing = () => {
                         type='number'
                         min='1'
                         value={form.numberOfTickets}
-                        onChange={e =>
-                          setForm(f => ({
+                        onChange={(e) =>
+                          setForm((f) => ({
                             ...f,
                             numberOfTickets: Number(e.target.value),
                           }))
@@ -266,8 +266,8 @@ const CreateListing = () => {
                         min='0'
                         step='0.01'
                         value={form.pricePerTicket}
-                        onChange={e =>
-                          setForm(f => ({
+                        onChange={(e) =>
+                          setForm((f) => ({
                             ...f,
                             pricePerTicket: e.target.value,
                           }))
@@ -282,8 +282,8 @@ const CreateListing = () => {
                       id='ticket-section'
                       placeholder='e.g., 101, VIP, General Admission'
                       value={form.section}
-                      onChange={e =>
-                        setForm(f => ({ ...f, section: e.target.value }))
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, section: e.target.value }))
                       }
                     />
                   </div>
@@ -294,8 +294,8 @@ const CreateListing = () => {
                         id='ticket-row'
                         placeholder='e.g., A, 10'
                         value={form.row}
-                        onChange={e =>
-                          setForm(f => ({ ...f, row: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, row: e.target.value }))
                         }
                       />
                     </div>
@@ -305,8 +305,8 @@ const CreateListing = () => {
                         id='ticket-seat'
                         placeholder='e.g., 1-2 or 15, 16'
                         value={form.seats}
-                        onChange={e =>
-                          setForm(f => ({ ...f, seats: e.target.value }))
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, seats: e.target.value }))
                         }
                       />
                     </div>
@@ -315,18 +315,26 @@ const CreateListing = () => {
                     <Label htmlFor='ticket-type'>Ticket Type</Label>
                     <Select
                       value={form.ticketType}
-                      onValueChange={val =>
-                        setForm(f => ({ ...f, ticketType: val }))
+                      onValueChange={(val) =>
+                        setForm((f) => ({ ...f, ticketType: val }))
                       }
                     >
                       <SelectTrigger id='ticket-type'>
                         <SelectValue placeholder='Select ticket type' />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value='Mobile Ticket'>Mobile Ticket</SelectItem>
-                        <SelectItem value='Print-at-Home'>Print-at-Home</SelectItem>
-                        <SelectItem value='Physical Ticket'>Physical Ticket</SelectItem>
-                        <SelectItem value='Box Office Pickup'>Box Office Pickup</SelectItem>
+                        <SelectItem value='Mobile Ticket'>
+                          Mobile Ticket
+                        </SelectItem>
+                        <SelectItem value='Print-at-Home'>
+                          Print-at-Home
+                        </SelectItem>
+                        <SelectItem value='Physical Ticket'>
+                          Physical Ticket
+                        </SelectItem>
+                        <SelectItem value='Box Office Pickup'>
+                          Box Office Pickup
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -339,8 +347,8 @@ const CreateListing = () => {
                       placeholder='Add any details about your tickets that might be helpful for buyers.'
                       className='min-h-[100px]'
                       value={form.description}
-                      onChange={e =>
-                        setForm(f => ({ ...f, description: e.target.value }))
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, description: e.target.value }))
                       }
                     />
                   </div>
@@ -352,8 +360,8 @@ const CreateListing = () => {
                       id='ticket-image-url'
                       placeholder='Paste image URL here'
                       value={form.imageUrl}
-                      onChange={e =>
-                        setForm(f => ({ ...f, imageUrl: e.target.value }))
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, imageUrl: e.target.value }))
                       }
                     />
                   </div>
@@ -401,7 +409,9 @@ const CreateListing = () => {
                         {form.eventDate} at {form.eventTime}
                       </div>
                       <div className='text-gray-600'>Category:</div>
-                      <div className='col-span-2 font-medium'>{form.category}</div>
+                      <div className='col-span-2 font-medium'>
+                        {form.category}
+                      </div>
                     </div>
                   </div>
                   {/* Ticket Summary */}
@@ -420,7 +430,9 @@ const CreateListing = () => {
                         ${form.pricePerTicket}
                       </div>
                       <div className='text-gray-600'>Section:</div>
-                      <div className='col-span-2 font-medium'>{form.section}</div>
+                      <div className='col-span-2 font-medium'>
+                        {form.section}
+                      </div>
                       <div className='text-gray-600'>Row:</div>
                       <div className='col-span-2 font-medium'>{form.row}</div>
                       <div className='text-gray-600'>Seats:</div>
@@ -455,7 +467,8 @@ const CreateListing = () => {
                     <div className='space-y-2'>
                       <div className='flex justify-between'>
                         <span className='text-gray-600'>
-                          Ticket Price ({form.numberOfTickets} x ${form.pricePerTicket})
+                          Ticket Price ({form.numberOfTickets} x $
+                          {form.pricePerTicket})
                         </span>
                         <span className='font-medium'>
                           $
@@ -495,8 +508,8 @@ const CreateListing = () => {
                           $
                           {(
                             Number(form.numberOfTickets) *
-                              Number(form.pricePerTicket || 0) *
-                              0.92
+                            Number(form.pricePerTicket || 0) *
+                            0.92
                           ).toFixed(2)}
                         </span>
                       </div>

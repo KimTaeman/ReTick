@@ -86,8 +86,8 @@ export const registerController = async (c: Context) => {
 export const loginController = async (c: Context) => {
   try {
     const body = await c.req.json<createUserBody>();
-    const { email, password } = body;
-    if (!email || !password) {
+    const { email, name, password } = body;
+    if (!email || !name || !password) {
       return c.json({ message: 'Missing required fields' }, 400);
     }
     const existingUser = await db.user.findFirst({

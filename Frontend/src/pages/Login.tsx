@@ -18,18 +18,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
 import popToast from '@/lib/popToast';
 import { ToastContainer } from 'react-toastify';
-import { loginUser } from "@/api/user";
+import { loginUser, signupUser } from '@/api/user';
+import { useSignup } from '../hooks/use-users';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  // const [rememberMe, setRememberMe] = useState(false);
-  // const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    mutateAsync: signup,
+    isLoading: isSignupLoading,
+    error,
+  } = useSignup();
+
+  if (isLoading || isSignupLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading profile</div>;
+  // if (!user) return <div>No user data</div>;
 
   const validateEmail = (email) => {
     return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -73,8 +81,8 @@ const Login = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!firstName || !lastName) {
-      popToast('Please enter your first and last name', 'warning');
+    if (!name) {
+      popToast('Please enter your name', 'warning');
       return;
     }
 
@@ -93,25 +101,23 @@ const Login = () => {
       return;
     }
 
-    // if (!termsAccepted) {
-    //   toast({
-    //     title: 'Terms not accepted',
-    //     description: 'Please accept the Terms of Service and Privacy Policy.',
-    //     variant: 'destructive',
-    //   });
-    //   return;
-    // }
-
     setIsLoading(true);
 
     try {
-      setTimeout(() => {
-        popToast('Account created successfully', 'success');
-        navigate('/profile');
-        setIsLoading(false);
-      }, 1500);
-    } catch (error) {
-      popToast('Signup failed. Please try again.', 'error');
+      await signup({
+        email,
+        password,
+        name,
+        phone: phoneNumber,
+      });
+      popToast('Account created successfully', 'success');
+      navigate('/profile');
+    } catch (error: any) {
+      popToast(
+        error?.response?.data?.msg || 'Signup failed. Please try again.',
+        'error'
+      );
+    } finally {
       setIsLoading(false);
     }
   };
@@ -167,12 +173,6 @@ const Login = () => {
                         >
                           Password
                         </Label>
-                        {/* <Link
-                          to='/forgot-password'
-                          className='text-sm text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300'
-                        >
-                          Forgot password?
-                        </Link> */}
                       </div>
                       <Input
                         id='password'
@@ -184,22 +184,6 @@ const Login = () => {
                         className='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
                       />
                     </div>
-
-                    {/* <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="remember"
-                        checked={rememberMe}
-                        onCheckedChange={(checked) =>
-                          setRememberMe(checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor="remember"
-                        className="text-sm text-gray-700 dark:text-gray-200"
-                      >
-                        Remember me
-                      </Label>
-                    </div> */}
 
                     <Button
                       type='submit'
@@ -224,39 +208,21 @@ const Login = () => {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSignup} className='space-y-4'>
-                    <div className='grid grid-cols-2 gap-4'>
-                      <div className='space-y-2'>
-                        <Label
-                          htmlFor='first-name'
-                          className='text-gray-700 dark:text-gray-200'
-                        >
-                          First name
-                        </Label>
-                        <Input
-                          id='first-name'
-                          placeholder='John'
-                          required
-                          value={firstName}
-                          onChange={(e) => setFirstName(e.target.value)}
-                          className='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
-                        />
-                      </div>
-                      <div className='space-y-2'>
-                        <Label
-                          htmlFor='last-name'
-                          className='text-gray-700 dark:text-gray-200'
-                        >
-                          Last name
-                        </Label>
-                        <Input
-                          id='last-name'
-                          placeholder='Doe'
-                          required
-                          value={lastName}
-                          onChange={(e) => setLastName(e.target.value)}
-                          className='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
-                        />
-                      </div>
+                    <div className='space-y-2'>
+                      <Label
+                        htmlFor='signup-name'
+                        className='text-gray-700 dark:text-gray-200'
+                      >
+                        Name
+                      </Label>
+                      <Input
+                        id='signup-name'
+                        placeholder='Your Name'
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+                      />
                     </div>
 
                     <div className='space-y-2'>
@@ -312,36 +278,6 @@ const Login = () => {
                         className='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
                       />
                     </div>
-
-                    {/* <div className='flex items-center space-x-2'>
-                      <Checkbox
-                        id='terms'
-                        checked={termsAccepted}
-                        onCheckedChange={(checked) =>
-                          setTermsAccepted(checked === true)
-                        }
-                        required
-                      />
-                      <Label
-                        htmlFor='terms'
-                        className='text-sm text-gray-700 dark:text-gray-200'
-                      >
-                        I agree to the{' '}
-                        <Link
-                          to='/terms'
-                          className='text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300'
-                        >
-                          Terms of Service
-                        </Link>{' '}
-                        and{' '}
-                        <Link
-                          to='/privacy'
-                          className='text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300'
-                        >
-                          Privacy Policy
-                        </Link>
-                      </Label>
-                    </div> */}
 
                     <Button
                       type='submit'
