@@ -18,6 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
 import popToast from '@/lib/popToast';
 import { ToastContainer } from 'react-toastify';
+import { loginUser } from "@/api/user";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      const response = await loginUser({ email, password });
       setTimeout(() => {
         popToast('Logged in successfully', 'success');
         navigate('/profile');
