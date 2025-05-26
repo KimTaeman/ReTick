@@ -86,8 +86,8 @@ export const registerController = async (c: Context) => {
 export const loginController = async (c: Context) => {
   try {
     const body = await c.req.json<createUserBody>();
-    const { email, name, password } = body;
-    if (!email || !name || !password) {
+    const { email, password } = body;
+    if (!email || !password) {
       return c.json({ message: 'Missing required fields' }, 400);
     }
     const existingUser = await db.user.findFirst({
@@ -171,7 +171,7 @@ export const refreshTokenController = async (c: Context) => {
     }
     const decoded = jwt.verify(
       refreshToken,
-      process.env.REFRESHTOKEN_SECRET_KEY!
+      process.env.REFRESH_TOKEN_SECRET_KEY!
     ) as { _id: number };
 
     if (!decoded?._id) {

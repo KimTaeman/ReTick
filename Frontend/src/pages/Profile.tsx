@@ -18,13 +18,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/api/user';
 
 // Mock user data
-// const user = {
-//   id: '123',
-//   name: 'John Doe',
-//   email: 'john@example.com',
-//   avatarUrl: '',
-//   joinedDate: 'March 2023',
-// };
+const user = {
+  id: '123',
+  name: 'John Doe',
+  email: 'john@example.com',
+  avatarUrl: '',
+  joinedDate: 'March 2023',
+};
 
 // Mock purchase history
 const purchaseHistory = [
@@ -67,18 +67,18 @@ const listingHistory = [
 const Profile = () => {
   const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
 
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['profile'],
-    queryFn: getProfile,
-  });
+  // const {
+  //   data: user,
+  //   isLoading,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ['profile'],
+  //   queryFn: getProfile,
+  // });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading profile</div>;
-  if (!user) return <div>No user data</div>;
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>Error loading profile</div>;
+  // if (!user) return <div>No user data</div>;
 
   return (
     <div className='min-h-screen flex flex-col'>
@@ -180,108 +180,8 @@ const Profile = () => {
                 <CardContent>
                   <Tabs defaultValue='purchases'>
                     <TabsList className='mb-4'>
-                      <TabsTrigger value='purchases'>My Purchases</TabsTrigger>
                       <TabsTrigger value='listings'>My Listings</TabsTrigger>
                     </TabsList>
-
-                    {/* Purchases Tab */}
-                    <TabsContent value='purchases'>
-                      {purchaseHistory.length > 0 ? (
-                        <div className='space-y-4'>
-                          {purchaseHistory.map((purchase) => (
-                            <div
-                              key={purchase.id}
-                              className='border rounded-md p-4'
-                            >
-                              <div className='flex justify-between mb-2'>
-                                <h3 className='font-semibold text-lg'>
-                                  {purchase.eventName}
-                                </h3>
-                                <span
-                                  className={`px-2 py-1 text-xs font-bold rounded-full bg-green-100 text-green-700`}
-                                >
-                                  {purchase.status}
-                                </span>
-                              </div>
-                              <p className='text-gray-600 mb-1'>
-                                {purchase.venue}
-                              </p>
-                              <p className='text-gray-600 mb-1'>
-                                {purchase.date}
-                              </p>
-                              <div className='flex justify-between mt-3'>
-                                <span className='text-gray-600'>
-                                  {purchase.quantity} x {purchase.ticketType}
-                                </span>
-                                <span className='font-semibold'>
-                                  $
-                                  {(purchase.price * purchase.quantity).toFixed(
-                                    2
-                                  )}
-                                </span>
-                              </div>
-                              <div className='mt-4 flex justify-end gap-2'>
-                                <Button
-                                  variant='outline'
-                                  size='sm'
-                                  onClick={() =>
-                                    setOpenPurchaseId(
-                                      openPurchaseId === purchase.id
-                                        ? null
-                                        : purchase.id
-                                    )
-                                  }
-                                >
-                                  {openPurchaseId === purchase.id
-                                    ? 'Hide Details'
-                                    : 'View Details'}
-                                </Button>
-                              </div>
-                              {/* Details section */}
-                              {openPurchaseId === purchase.id && (
-                                <div className='mt-4 bg-gray-50 p-4 rounded'>
-                                  <p>
-                                    <strong>Event:</strong> {purchase.eventName}
-                                  </p>
-                                  <p>
-                                    <strong>Venue:</strong> {purchase.venue}
-                                  </p>
-                                  <p>
-                                    <strong>Date:</strong> {purchase.date}
-                                  </p>
-                                  <p>
-                                    <strong>Ticket Type:</strong>{' '}
-                                    {purchase.ticketType}
-                                  </p>
-                                  <p>
-                                    <strong>Quantity:</strong>{' '}
-                                    {purchase.quantity}
-                                  </p>
-                                  <p>
-                                    <strong>Total Price:</strong> $
-                                    {(
-                                      purchase.price * purchase.quantity
-                                    ).toFixed(2)}
-                                  </p>
-                                  <p>
-                                    <strong>Status:</strong> {purchase.status}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className='text-center py-8'>
-                          <p className='text-gray-500'>
-                            You haven't purchased any tickets yet.
-                          </p>
-                          <Button className='mt-4 bg-purple-600 hover:bg-purple-700'>
-                            Browse Events
-                          </Button>
-                        </div>
-                      )}
-                    </TabsContent>
 
                     {/* Listings Tab */}
                     <TabsContent value='listings'>

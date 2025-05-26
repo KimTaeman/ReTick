@@ -10,13 +10,16 @@ export const registerUser = async (data: any) => {
   return response.data;
 };
 
-export const loginUser = async (data: any) => {
-  const response = await Axios.post('/users/login', {
-    data,
-    withCredentials: true,
+export const loginUser = async (data: { email: string; password: string }) => {
+  const response = await Axios.post('/users/login', data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // withCredentials: true, // Uncomment if you need credentials
   });
   return response.data;
 };
+
 export const signupUser = async ({
   email,
   password,
