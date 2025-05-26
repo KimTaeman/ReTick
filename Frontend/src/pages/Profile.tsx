@@ -18,13 +18,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/api/user';
 
 // Mock user data
-const user = {
-  id: '123',
-  name: 'John Doe',
-  email: 'john@example.com',
-  avatarUrl: '',
-  joinedDate: 'March 2023',
-};
+// const user = {
+//   id: '123',
+//   name: 'John Doe',
+//   email: 'john@example.com',
+//   avatarUrl: '',
+//   joinedDate: 'March 2023',
+// };
 
 // Mock purchase history
 const purchaseHistory = [
@@ -67,19 +67,21 @@ const listingHistory = [
 const Profile = () => {
   const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
 
-  // const {
-  //   data: user,
-  //   isLoading,
-  //   error,
-  // } = useQuery({
-  //   queryKey: ['profile'],
-  //   queryFn: getProfile,
-  // });
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['profile'],
+    queryFn: getProfile,
+  });
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error loading profile</div>;
-  // if (!user) return <div>No user data</div>;
+  const user = response?.user;
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading profile</div>;
+  if (!user) return <div>No user data</div>;
+  console.log('User data:', user);
   return (
     <div className='min-h-screen flex flex-col'>
       <Navbar />
@@ -95,13 +97,13 @@ const Profile = () => {
                     <Avatar className='h-24 w-24 mb-4'>
                       <AvatarImage src={user.avatarUrl} alt={user.name} />
                       <AvatarFallback className='text-2xl bg-purple-100 text-purple-600'>
-                        {user.name.substring(0, 2)}
+                        {user.name?.substring(0, 2)}
                       </AvatarFallback>
                     </Avatar>
                     <h2 className='text-xl font-bold mb-1'>{user.name}</h2>
-                    <p className='text-sm text-gray-500'>
+                    {/* <p className='text-sm text-gray-500'>
                       Member since {user.joinedDate}
-                    </p>
+                    </p> */}
 
                     <Button className='mt-4 w-full bg-purple-600 hover:bg-purple-700'>
                       <Edit className='h-4 w-4 mr-2' />
@@ -132,13 +134,13 @@ const Profile = () => {
                 <CardContent>
                   <form className='space-y-4'>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                      <div className='space-y-2'>
+                      {/* <div className='space-y-2'>
                         <Label htmlFor='first-name'>First name</Label>
                         <Input id='first-name' defaultValue='John' />
-                      </div>
+                      </div> */}
                       <div className='space-y-2'>
-                        <Label htmlFor='last-name'>Last name</Label>
-                        <Input id='last-name' defaultValue='Doe' />
+                        <Label htmlFor='name'>Name</Label>
+                        <Input id='name' defaultValue={user?.name || ''} />
                       </div>
                     </div>
 
@@ -147,7 +149,7 @@ const Profile = () => {
                       <Input
                         id='email'
                         type='email'
-                        defaultValue='john@example.com'
+                        defaultValue={user.email || ' '}
                       />
                     </div>
 
@@ -156,7 +158,7 @@ const Profile = () => {
                       <Input
                         id='phone'
                         type='tel'
-                        placeholder='Enter your phone number'
+                        placeholder={user.phone || 'Enter your phone number'}
                       />
                     </div>
 

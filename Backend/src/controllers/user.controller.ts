@@ -29,11 +29,11 @@ type createUserBody = {
 };
 
 export const getCurrentUserController = async (c: Context) => {
+  console.log('Current user:', c.user);
   if (!c.user) return c.json({ message: 'Unauthorized' }, 401);
-
   const user = await db.user.findUnique({
     where: { id: c.user.id },
-    select: { id: true, name: true, email: true },
+    select: { id: true, name: true, email: true, phone: true },
   });
 
   if (!user) return c.json({ message: 'User not found' }, 404);
@@ -172,14 +172,14 @@ export const refreshTokenController = async (c: Context) => {
     const decoded = jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET_KEY!
-    ) as { _id: number };
+    ) as { id: number };
 
-    if (!decoded?._id) {
+    if (!decoded?.id) {
       return c.json({ message: 'Invalid refresh token' }, 401);
     }
 
     const user = await db.user.findUnique({
-      where: { id: String(decoded._id) },
+      where: { id: String(decoded.id) },
     });
 
     if (!user) {
@@ -302,14 +302,14 @@ export const updateUsernameController = async (c: Context) => {
     }
 
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET!) as {
-      _id: number;
+      id: number;
     };
 
-    if (!decoded?._id) {
+    if (!decoded?.id) {
       return c.json({ message: 'Invalid token' }, 401);
     }
 
-    const result = await changeName(String(decoded._id), name);
+    const result = await changeName(String(decoded.id), name);
 
     if (!result.success || !result.user) {
       return c.json({ message: result.message }, 400);

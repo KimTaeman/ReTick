@@ -67,6 +67,7 @@ const Login = () => {
 
     try {
       const response = await loginUser({ email, password });
+      // console.log('respons is ', response);
       setTimeout(() => {
         popToast('Logged in successfully', 'success');
         navigate('/profile');

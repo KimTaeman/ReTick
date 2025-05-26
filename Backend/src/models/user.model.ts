@@ -61,7 +61,7 @@ export const generateRefreshToken = (userId: number): string => {
   const refreshSecret = process.env.REFRESH_TOKEN_SECRET_KEY;
   if (!refreshSecret) throw new Error('Missing REFRESH_TOKEN_SECRET_KEY');
 
-  return jwt.sign({ _id: userId }, refreshSecret, {
+  return jwt.sign({ id: userId }, refreshSecret, {
     expiresIn: '7d',
   });
 };

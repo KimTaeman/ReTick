@@ -1,4 +1,4 @@
-import { db } from "../index.ts";
+import { db } from '../index.ts';
 
 export const createTicket = async (data: any) => {
   const ticket = await db.ticket.create({ data });

@@ -1,5 +1,5 @@
 import { Axios } from '../../axiosInstance';
-const userId = '5bd6c2f7-fe48-436a-a455-f7c96b969678';
+// const userId = '5bd6c2f7-fe48-436a-a455-f7c96b969678';
 
 export const getAllTickets = async () => {
   const response = await Axios.get('/tickets');
@@ -20,7 +20,7 @@ export const createTicket = async (data: any) => {
     eventTime: eventTime, // optional: keep this if backend uses it
     pricePerTicket: Number(pricePerTicket), // convert to number
     imageUrl: data.imageUrl || null, // ensure null if empty
-    sellerId: userId,
+    // sellerId: userId,
   };
   console.log('Creating ticket with data:', newData);
   const response = await Axios.post('/tickets', newData);
