@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { TicketCard } from '@/components/TicketCard';
+import { useRecentTickets, useTickets } from '@/hooks/use-tickets';
 
 // Mock data for featured tickets (aligned with Prisma schema)
 export const mockTickets = [
@@ -96,12 +97,10 @@ export const mockTickets = [
 ];
 
 const FeaturedTickets = () => {
-  const [tickets, setTickets] = useState(mockTickets);
+  const { data: tickets = [], isLoading, error } = useRecentTickets(5);
 
-  useEffect(() => {
-    // In a real app, this would be an API call for featured tickets
-    setTickets(mockTickets.filter((ticket) => ticket.featured));
-  }, []);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading tickets.</div>;
 
   return (
     <section className='py-12 md:py-16'>

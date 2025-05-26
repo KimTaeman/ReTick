@@ -5,8 +5,12 @@ export const createTicket = async (data: any) => {
   return ticket;
 };
 
-export const getAllTickets = async () => {
+export const getAllTickets = async (limit?: number, category?: string) => {
+  const take = typeof limit === 'number' && !isNaN(limit) ? limit : undefined;
   return await db.ticket.findMany({
+    ...(take !== undefined ? { take } : {}),
+    where: category ? { category } : undefined,
+    orderBy: { createdAt: 'desc' },
     include: { seller: true },
   });
 };

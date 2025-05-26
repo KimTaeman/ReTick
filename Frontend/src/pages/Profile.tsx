@@ -21,8 +21,11 @@ import {
   useTickets,
   useUpdateTicket,
 } from '../hooks/use-tickets';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [openPurchaseId, setOpenPurchaseId] = useState<string | null>(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editTicket, setEditTicket] = useState<any>(null);
@@ -253,7 +256,10 @@ const Profile = () => {
                           <p className='text-gray-500'>
                             You haven't listed any tickets for sale yet.
                           </p>
-                          <Button className='mt-4 bg-purple-600 hover:bg-purple-700'>
+                          <Button
+                            className='mt-4 bg-purple-600 hover:bg-purple-700'
+                            onClick={() => navigate('/sell')}
+                          >
                             Sell Tickets
                           </Button>
                         </div>

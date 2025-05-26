@@ -20,7 +20,10 @@ export const createTicketController = async (c: Context) => {
 };
 
 export const getAllTicketsController = async (c: Context) => {
-  const tickets = await getAllTickets();
+  const limitParam = c.req.query('limit');
+  const limit = limitParam !== undefined ? Number(limitParam) : undefined;
+  const category = c.req.query('category');
+  const tickets = await getAllTickets(limit, category);
   return c.json({ success: true, data: tickets });
 };
 
@@ -75,7 +78,7 @@ export const updateTicketController = async (c: Context) => {
 export const deleteTicketController = async (c: Context) => {
   const id = c.req.param('id');
   const userId = c.user?.id;
-  
+
   const ticket = await getTicketById(id);
   if (!ticket) {
     return c.json({ success: false, message: 'Ticket not found' }, 404);
@@ -83,7 +86,7 @@ export const deleteTicketController = async (c: Context) => {
   if (ticket.sellerId !== userId) {
     return c.json({ success: false, message: 'Unauthorized' }, 403);
   }
-  
+
   try {
     await deleteTicket(id);
     return c.json({ success: true, message: 'Deleted successfully' });

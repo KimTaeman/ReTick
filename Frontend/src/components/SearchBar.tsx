@@ -12,6 +12,8 @@ const SearchBar = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/tickets?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/tickets'); // Navigate to tickets page without query if search is empty
     }
   };
 

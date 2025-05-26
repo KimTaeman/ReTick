@@ -1,11 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getAllTickets, getTicketById, updateTicket } from '../api/ticket';
+import {
+  getAllTickets,
+  getTicketById,
+  updateTicket,
+  deleteTicket,
+} from '../api/ticket';
 
 export function useTickets() {
   return useQuery({
     queryKey: ['tickets'],
     queryFn: getAllTickets,
     staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+import { getRecentTickets } from '../api/ticket';
+
+export function useRecentTickets(limit = 8, category?: string) {
+  return useQuery({
+    queryKey: ['recent-tickets', limit, category],
+    queryFn: () => getRecentTickets(limit, category),
+    staleTime: 1000 * 60 * 5,
   });
 }
 

@@ -11,6 +11,13 @@ export const getTicketById = async (id: string) => {
   return response.data.data;
 };
 
+export const getRecentTickets = async (limit = 5, category?: string) => {
+  const params: any = { limit };
+  if (category) params.category = category;
+  const response = await Axios.get('/tickets', { params });
+  return response.data.data;
+};
+
 export const createTicket = async (data: any) => {
   const { eventDate, eventTime, pricePerTicket, ...rest } = data;
   const combinedDateTime = new Date(`${eventDate}T${eventTime}:00`);
