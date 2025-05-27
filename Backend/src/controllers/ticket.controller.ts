@@ -1,4 +1,8 @@
-import type { Context } from 'hono';
+import type { Context as HonoContext } from 'hono';
+
+interface Context extends HonoContext {
+  user?: { id: string };
+}
 import {
   createTicket,
   getAllTickets,

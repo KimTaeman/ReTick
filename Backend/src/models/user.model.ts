@@ -11,7 +11,7 @@ export const hashPassword = async (plainPassword: string) => {
   return await bcrypt.hash(plainPassword, 10);
 };
 
-export const createUser = async (email: string, password: string) => {
+export const createUser = async (email: string, password: string, name : string) => {
   const existingUser = await db.user.findUnique({
     where: { email },
   });
